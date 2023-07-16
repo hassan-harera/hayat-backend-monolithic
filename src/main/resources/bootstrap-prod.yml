@@ -1,0 +1,86 @@
+donation:
+  food:
+    expiration_in_days: 45
+jwt:
+  token:
+    expire: 36000000
+    refresh:
+      expire: 864000000
+    secret:
+      key: ${SECRET_KEY}
+server:
+  port: 8080
+spring:
+  application:
+    name: hayat_app
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
+    password: ${DB_PASSWORD}
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/hayat?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: ${DB_USERNAME}
+  hibernate:
+    connection:
+      charSet: UTF-8
+      characterEncoding: utf8
+      useUnicode: true
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        format_sql: false
+  liquibase:
+    change-log: classpath:db/main/changelog/changelog-main.yaml
+  main:
+    allow-bean-definition-overriding: true
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          max-wait: -1
+          min-idle: 0
+      port: 6379
+      timeout: 2000
+sms:
+  config:
+    environment: ${SMS_ENV}
+    username: ${SMS_USERNAME}
+    password: ${SMS_PASSWORD}
+    sender: ${SMS_SENDER}
+    language: ${SMS_LANGUAGE}
+  schemaless:
+    config:
+      url: https://smsmisr.com/api/SMS/
+  schema:
+    config:
+      url: https://smsmisr.com/api/vSMS/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    distribution:
+      percentiles-histogram:
+        all: true
+        http.server.requests: true
+  tracing:
+    sampling:
+      probability: 1.0
+  prometheus:
+    metrics:
+      export:
+        step: 10s
