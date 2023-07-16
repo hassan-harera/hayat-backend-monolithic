@@ -18,7 +18,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     password: ${DB_PASSWORD}
     url: jdbc:mysql://${DB_HOST}:${DB_PORT}/hayat?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
-    username: ${DB_USERNAME}
+    username: ${DB_USER}
   hibernate:
     connection:
       charSet: UTF-8

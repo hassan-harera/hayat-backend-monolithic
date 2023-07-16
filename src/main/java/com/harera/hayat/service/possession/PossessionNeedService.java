@@ -3,7 +3,6 @@ package com.harera.hayat.service.possession;
 import java.time.LocalDateTime;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.harera.hayat.exception.DocumentNotFoundException;
@@ -27,7 +26,7 @@ public class PossessionNeedService implements BaseService {
     private final PossessionValidation possessionValidation;
     private final ModelMapper modelMapper;
     private final CityService cityService;
-    private final int possessionNeedExpirationDays;
+    private final int possessionNeedExpirationDays = 45;
     private final PossessionNeedRepository possessionNeedRepository;
     private final PossessionCategoryRepository possessionCategoryRepository;
     private final PossessionConditionRepository possessionConditionRepository;
@@ -36,7 +35,6 @@ public class PossessionNeedService implements BaseService {
 
     public PossessionNeedService(PossessionValidation possessionValidation,
                     ModelMapper modelMapper, CityService cityService,
-                    @Value("${needs.possession.expiration_days}") String possessionNeedExpirationDays,
                     PossessionNeedRepository possessionNeedRepository,
                     PossessionCategoryRepository possessionCategoryRepository,
                     PossessionConditionRepository possessionConditionRepository,
@@ -45,8 +43,6 @@ public class PossessionNeedService implements BaseService {
         this.possessionValidation = possessionValidation;
         this.modelMapper = modelMapper;
         this.cityService = cityService;
-        this.possessionNeedExpirationDays =
-                        Integer.parseInt(possessionNeedExpirationDays);
         this.possessionNeedRepository = possessionNeedRepository;
         this.possessionCategoryRepository = possessionCategoryRepository;
         this.possessionConditionRepository = possessionConditionRepository;
