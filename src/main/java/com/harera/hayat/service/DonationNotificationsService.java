@@ -12,12 +12,6 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class DonationNotificationsService {
 
-    private final String notificationsQueue;
-
-    public DonationNotificationsService(
-                    @Value("${spring.rabbitmq.queue.notifications}") String notificationsQueue) {
-        this.notificationsQueue = notificationsQueue;
-    }
 
     public void notifyProcessingDonation(BaseDonation donation) {
         Notification notification = createProcessingDonationNotification(donation);

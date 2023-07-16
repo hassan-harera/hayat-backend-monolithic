@@ -12,12 +12,6 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class AuthorizationNotificationsService {
 
-    private final String notificationsQueue;
-
-    public AuthorizationNotificationsService(
-                    @Value("${spring.rabbitmq.queue.notifications}") String notificationsQueue) {
-        this.notificationsQueue = notificationsQueue;
-    }
 
     public void notifyNewLoginDetected(User user) {
         Notification notification = createNewLoginNotification(user);
