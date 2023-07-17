@@ -15,7 +15,6 @@ services:
       - redis
       - db
       - mongo
-    network_mode: host
     env_file:
       - .env
     environment:
