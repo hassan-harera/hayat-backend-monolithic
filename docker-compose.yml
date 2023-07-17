@@ -9,6 +9,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    networks:
+      - hayat_external
     ports:
       - "8080:8080"
     depends_on:
