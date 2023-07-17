@@ -10,7 +10,10 @@ public class SubjectUtils {
         } else if (RegexUtils.isUsername(subject)) {
             return new Subject.Username(subject);
         } else {
-            return Subject.Other.INSTANCE;
+            return null;
         }
+    }
+
+    private SubjectUtils() {
     }
 }

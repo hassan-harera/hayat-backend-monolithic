@@ -97,7 +97,7 @@ public class FoodDonationService {
         foodDonationRepository.save(foodDonation);
 
         donationNotificationsService.notifyProcessingDonation(foodDonation);
-//        reviewDonation(foodDonation);
+        //        reviewDonation(foodDonation);
 
         return modelMapper.map(foodDonation, FoodDonationResponse.class);
     }
@@ -197,9 +197,9 @@ public class FoodDonationService {
     }
 
     private User getUser(String token) {
-        String subject = jwtUtils.extractUserSubject(token);
-        return userRepository.findByEmail(subject).orElseThrow(
-                        () -> new EntityNotFoundException(User.class, 0, subject));
+        long subject = Long.parseLong(jwtUtils.extractUserSubject(token));
+        return userRepository.findById(subject).orElseThrow(
+                        () -> new EntityNotFoundException(User.class, subject, ""));
     }
 
     public void downvote(Long id, String authorization) {

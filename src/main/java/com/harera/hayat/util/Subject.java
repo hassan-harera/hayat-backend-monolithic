@@ -1,6 +1,6 @@
 package com.harera.hayat.util;
 
-public sealed class Subject {
+public class Subject {
 
     public static final class Email extends Subject {
         private final String email;
@@ -38,9 +38,6 @@ public sealed class Subject {
         }
     }
 
-    public static final class Other extends Subject {
-        private Other() {}
-
-        public static final Other INSTANCE = new Other();
+    private Subject() {
     }
 }
