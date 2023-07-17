@@ -9,8 +9,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    networks:
-      - hayat_external
     ports:
       - "8080:8080"
     depends_on:
@@ -42,10 +40,6 @@ services:
     image: redis:latest
     restart: always
     command: redis-server --appendonly yes --replica-read-only no
-    networks:
-      - hayat_internal
-    ports:
-      - "6379:6379"
 
   db:
     image: mysql:8.0
@@ -57,10 +51,6 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
     volumes:
       - hayat_db:/var/lib/mysql
-    networks:
-      - hayat_internal
-    ports:
-      - ${DB_PORT}:3306
 
   mongo:
     image: mongo:latest
@@ -73,18 +63,9 @@ services:
       - MONGO_INITDB_DATABASE=${MONGO_DB}
     volumes:
       - hayat_mongodb:/data/db
-    networks:
-      - hayat_internal
-    ports:
-      - ${MONGO_PORT}:27017
 
 volumes:
   hayat_db:
   hayat_keycloak:
   hayat_mongodb:
   hayat_postgres:
-networks:
-  hayat_internal:
-    internal: true
-  hayat_external:
-    driver: bridge
