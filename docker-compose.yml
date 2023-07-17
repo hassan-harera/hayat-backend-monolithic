@@ -15,9 +15,7 @@ services:
       - redis
       - db
       - mongo
-    networks:
-      - hayat_internal
-      - hayat_external
+    network_mode: host
     env_file:
       - .env
     environment:
@@ -88,4 +86,4 @@ networks:
   hayat_internal:
     internal: true
   hayat_external:
-    internal: false
+    driver: bridge
